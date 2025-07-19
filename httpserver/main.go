@@ -23,10 +23,10 @@ func checkQueueFair(w http.ResponseWriter, r *http.Request) (ok bool) {
 	// Configure Queue-Fair
 
 	// From the Account -> Your Account page in the Portal (not any Queue Settings tab)
-	queuefair.QueueFairConfig.Account = "DELETE_AND_REPLACE_WITH_YOUR_ACCOUNT_SECRET"
+	queuefair.QueueFairConfig.Account = "DELETE_AND_REPLACE_WITH_YOUR_ACCOUNT_SYSTEM_NAME"
 
 	// From the Account -> Your Account page in the Portal (not any Queue Settings tab)
-	queuefair.QueueFairConfig.AccountSecret = "DELETE_AND_REPLACE_WITH_YOUR_ACCOUNT_SYSTEM_NAME"
+	queuefair.QueueFairConfig.AccountSecret = "DELETE_AND_REPLACE_WITH_YOUR_ACCOUNT_SECRET"
 
 	// Set to false for production systems.
 	queuefair.QueueFairConfig.Debug = false
