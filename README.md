@@ -50,6 +50,7 @@ Here's step by step instructions.
 ```
 
 **3.** In your Go server you will need the `checkQueueFair()` function from main.go.  edit it to use your Account secret and system name from the Portal (or you can edit queue_fair_config.go with these values).  These are both on the Account -> Your Account page - don't use any queue secret or system name from any Queue Settings tab.  Call `checkQueueFair()` in the manner indicated in the main.go example file from within your Go server code at the *start* of processing of any *page* request.  
+
 **4.** Note the `QueueFairConfig.SettingsCacheLifetimeMinutes` setting - this is how often your web server will check for updated settings from the Queue-Fair queue servers (which change when you hit Make Live).   The default value is 5 minutes.  You can set this to 0 to download a fresh copy with every request but **DON'T DO THIS** on your production machine/live queue with real people, or your server may collapse under load.  Between requests, these settings are stored in memory.
 
 **5.** Note the `QueueFairConfig.AdapterMode` setting.  "safe" is recommended - we also support "simple" - see the Technical Guide for further details.
