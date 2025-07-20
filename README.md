@@ -55,7 +55,7 @@ Here's step by step instructions.
 
 **5.** Note the `QueueFairConfig.AdapterMode` setting.  "safe" is recommended - we also support "simple" - see the Technical Guide for further details.
 
-**6.** **IMPORTANT** Note the `QueueFairConfig.Debug setting - this is set to true in the example code but you MUST set debug to false on production machines/live queues as otherwise your web logs will rapidly become full.  You can safely set it to a single IP address to just output debug information for a single visitor, even on a production machine.  Debug logging messages are routed through the go log framework, but you can change that by editing queue_fair_logger.go
+**6.** **IMPORTANT** Note the `QueueFairConfig.Debug setting - this is set to true in the example code but you MUST set debug to false on production machines/live queues as otherwise your web logs will rapidly become full.  You can safely set it to a single IP address to just output debug information for a single visitor, even on a production machine.  Debug logging messages are routed through the Go log framework, but you can change that by editing queue_fair_logger.go
 
 Once that's done you can run the included sample httpserver by cd'ing into that folder and running
 
