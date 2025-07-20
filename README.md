@@ -1,7 +1,7 @@
 ---
 ## Queue-Fair Go / Golang Adapter README & Installation Guide
 
-Queue-Fair can be added to any web server easily in minutes.  You will need a Queue-Fair account - please visit https://queue-fair.com/free-trial if you don't already have one.  You should also have received our Technical Guide.
+Queue-Fair can be added to any web server easily in minutes.  You will need a Queue-Fair account - please visit https://queue-fair.com/sign-up if you don't already have one.  You can get a Free Tier account now for free.  You should also have received our Technical Guide.
 
 ## Client-Side JavaScript Adapter
 
