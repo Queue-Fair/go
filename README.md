@@ -49,8 +49,7 @@ Here's step by step instructions.
     sudo apt-get install ntp
 ```
 
-**3.** You will need the checkQueueFair() function in main.go - edit it to use your Account secret and system name from the Portal (or you can edit queue_fair_config.go with these values).  These are both on the Account -> Your Account page - don't use any queue secret or system name from any Queue Settings tab.  Call it in the manner indicated in the main.go example file from within your Go server code.
-
+**3.** In your Go server you will need the `checkQueueFair()` function from main.go.  edit it to use your Account secret and system name from the Portal (or you can edit queue_fair_config.go with these values).  These are both on the Account -> Your Account page - don't use any queue secret or system name from any Queue Settings tab.  Call `checkQueueFair()` in the manner indicated in the main.go example file from within your Go server code at the *start* of processing of any *page* request.  
 **4.** Note the `QueueFairConfig.SettingsCacheLifetimeMinutes` setting - this is how often your web server will check for updated settings from the Queue-Fair queue servers (which change when you hit Make Live).   The default value is 5 minutes.  You can set this to 0 to download a fresh copy with every request but **DON'T DO THIS** on your production machine/live queue with real people, or your server may collapse under load.  Between requests, these settings are stored in memory.
 
 **5.** Note the `QueueFairConfig.AdapterMode` setting.  "safe" is recommended - we also support "simple" - see the Technical Guide for further details.
@@ -65,15 +64,17 @@ Once that's done you can run the included sample httpserver by cd'ing into that 
 
 That's it your done!
 
-In your go web server functions you should always ensure that `checkQueueFair()` is the *first* thing that happens within your functions.  This will ensure that the Adapter is the first thing that runs when a vistor accesses any page, which is necessary both to protect your server from load from lots of visitors and also so that the adapter can set the necessary cookies.  You can then use the Activation Rules in the Portal to set which pages on your site may trigger a queue.
+In your go web server page functions you should always ensure that `checkQueueFair()` is the *first* thing that happens within your functions.  This will ensure that the Adapter is the first thing that runs when a vistor accesses any page, which is necessary both to protect your server from load from lots of visitors and also so that the adapter can set the necessary cookies.  You can then use the Activation Rules in the Portal to set which pages on your site may trigger a queue.  
 
-In the case where the Adapter sends the request elsewhere (for example to show the user a queue page), `checkQueueFair()` will return false and the rest of the page should not be run.
+  In the case where the Adapter sends the request elsewhere (for example to show the user a queue page), `checkQueueFair()` will return false and the rest of the page should not be run - see the `allPaths()` function in main.go for an example.
 
 If it returns true, you MUST use the same ResponseWriter object (or Context, Ctx for other frameworks) that you passed to checkQueueFair() for the rest of your function, as otherwise people's Passed Cookies will not be set and they will be sent to the queue repeatedly.
 
-If your web server is sitting behind a proxy, CDN or load balancer, you may need to edit the property sets in checkQueueFair() to use values from forwarded headers instead for the protocol and client remote IP address.  If you need help with this, contact Queue-Fair support.
+** IMPORTANT ** You would normally exclude asset requests from the Adapter - it is normally just run on whole page requests, not images, static css files etc.  You should make sure any WebHook callbacks (e.g. from Payment Gateways) are *always* excluded from the Adapter. 
 
-If you are using the Hybrid Security Model and do not need to run the full Adapter process, just validate a Passed Cookie on your order page, the code for that is in checkQueueFair() too - it's the commmented-out stanza as indicated.
+** IMPORTANT ** If your web server is sitting behind a proxy, CDN or load balancer, you may need to edit the property sets in `checkQueueFair()` to use values from forwarded headers instead for the protocol and client remote IP address.  The sample code in `checkQueueFair` will check industry-standard X-Forwarded-For and X-Forwarded-Proto, but some providers don't conform to the standard and you may need to change the header names.  If you need help with this, contact Queue-Fair support.
+
+If you are using the Hybrid Security Model and do not need to run the full Adapter process, just validate a Passed Cookie on your order page, the code for that is in `checkQueueFair()` too - it's the commmented-out stanza as indicated.
 
 ### To test the Server-Side Adapter
 
