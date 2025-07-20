@@ -29,7 +29,7 @@ func checkQueueFair(w http.ResponseWriter, r *http.Request) (ok bool) {
 	queuefair.QueueFairConfig.AccountSecret = "DELETE_AND_REPLACE_WITH_YOUR_ACCOUNT_SECRET"
 
 	// Set to false for production systems.
-	queuefair.QueueFairConfig.Debug = false
+	queuefair.QueueFairConfig.Debug = true
 
 	// Extract required fields
 
