@@ -45,8 +45,7 @@ func checkQueueFair(w http.ResponseWriter, r *http.Request) (ok bool) {
 
 	// Will check for X-Forwarded-For, and if not found, get from the request.
 	// If your server is behind a reverse proxy (load balancer etc) that uses
-	// a different header name for the BROWSER's protocol (such as Cloudflare),
-	// change it here.
+	// a different header name for the BROWSER's IP address, change it here.
 	remoteIP := r.Header.Get("X-Forwarded-For")
 	if remoteIP == "" {
 		//Split this as r.RemoteAddr is "clientIP:port"
