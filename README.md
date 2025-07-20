@@ -35,7 +35,7 @@ Thus the Server-Side Adapter prevents visitors from skipping the queue by disabl
 
 This distribution includes a simple Go server using the net/http framework in the httpserver folder, and the Adapter code in the queuefair folder.
 
-The Adapter supports multiple Go HTTP frameworks.  The default queue_fair_http_service.go uses net/http and is suitable for plain Go web servers and also the Chi framework.  Additional framework implementations are available in the services subfolder - if you are using one of these, copy the service you need into the parent queuefair folder, and change the instantiation line in main.go to use it.
+The Adapter supports multiple Go HTTP frameworks.  The default queue_fair_http_service.go uses net/http and is suitable for plain Go web servers and also the Chi framework.  Additional framework implementations for Gin, Fiber and Echo are available in the services subfolder - if you are using one of these, copy the service for the framework you need into the parent queuefair folder, and change the service instantiation line `queuefair.NewQueueFairHTTPService` in main.go to use it.
 
 If you are not using Chi, Echo, Fiber, Gin or plain net/http, but some other framework, instantiate queue_fair_service.go for your framework - it's only four basic functions to write.
 
