@@ -73,7 +73,7 @@ If it returns true, you MUST use the same ResponseWriter object (or Context, Ctx
 
 ** IMPORTANT ** You would normally exclude asset requests from the Adapter - it is normally just run on whole page requests, not images, static css files etc.  You should make sure any WebHook callbacks (e.g. from Payment Gateways) are *always* excluded from the Adapter. 
 
-** IMPORTANT ** If your web server is sitting behind a proxy, CDN or load balancer, you may need to edit the property sets in `checkQueueFair()` to use values from forwarded headers instead for the protocol and client remote IP address.  The sample code in `checkQueueFair` will check industry-standard X-Forwarded-For and X-Forwarded-Proto, but some providers don't conform to the standard and you may need to change the header names.  If you need help with this, contact Queue-Fair support.
+** IMPORTANT ** If your web server is sitting behind a proxy, CDN or load balancer, you may need to edit the property sets in `checkQueueFair()` to use values from forwarded headers instead for the protocol and client remote IP address.  The sample code in `checkQueueFair()` will check industry-standard X-Forwarded-For and X-Forwarded-Proto, but some providers don't conform to the standard and you may need to change the header names.  If you need help with this, contact Queue-Fair support.
 
 If you are using the Hybrid Security Model and do not need to run the full Adapter process, just validate a Passed Cookie on your order page, the code for that is in `checkQueueFair()` too - it's the commmented-out stanza as indicated.
 
